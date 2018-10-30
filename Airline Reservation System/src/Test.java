@@ -7,8 +7,6 @@ public class Test {
 		
 		//this is araybia's comment
 		System.out.println("hi, how are you");
-		
-		//commentjjgj
 
 	}
 
