@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public abstract class User {
 
@@ -104,5 +108,21 @@ public abstract class User {
 			return this.password;
 		else
 			return "incorrect answer";
+	}
+	protected void insertDB(String table,int id) { //method for inserting users into the database
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("insert into "+table+" values("
+					+ id +",'"+this.firstname+"','"+this.lastname+"','"+this.address+"',"+this.zip+",'"+this.state+"','"+this.username+"','"+this.password+"','"+this.email+"','"+this.ssn+"','"+this.question+"','"+this.answer+"')");
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			//TODO: Close the database connection
+		}
+		
 	}
 }

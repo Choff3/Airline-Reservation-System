@@ -1,3 +1,8 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class Flight {
 	static int flightCount;
 	int flightNumber;
@@ -5,13 +10,16 @@ public class Flight {
 	String destinationCity;
 	int takeoffTime;
 	int arrivalTime;
+	String airline;
 	//time as an int for sorting purposes
-	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime) {
+	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline) {
 		this.flightNumber=++flightCount;
 		this.originCity = originCity;
 		this.destinationCity = destinationCity;
 		this.takeoffTime = takeoffTime;
 		this.arrivalTime = arrivalTime;
+		this.airline = airline;
+		this.insertDB();//insert the customer into the database
 	}
 	public String getOriginCity() {
 		return originCity;
@@ -55,4 +63,18 @@ public class Flight {
 				" and arrives in "+destinationCity+
 				" at "+timeToString(arrivalTime)+".";
 	}//toString method
+	
+	protected void insertDB() {	//method for inserting flights into the database
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//TODO close connection
+		}
+	}
 }
