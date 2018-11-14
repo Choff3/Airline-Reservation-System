@@ -1,13 +1,17 @@
 public class Admin extends User {
 
-	int employeeID;
-	static int count;
+	private int employeeID;
+	private static int empCount;
 	
 	public Admin(String firstname, String lastname, String address, int zip, String state, String username,
 			String password, String email, String ssn, String question, String answer) {
 		super(firstname, lastname, address, zip, state, username, password, email, ssn, question, answer);
-		employeeID = ++count;
-		this.insertDB("employees",this.employeeID);//insert the admin into the database
 	}
-
+	public int getId() {
+		return this.employeeID;
+	}
+	protected void insertDB() {
+		this.employeeID = ++empCount;
+		super.insertDB("employees",this.employeeID);
+	}
 }

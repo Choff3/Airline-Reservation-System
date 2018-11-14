@@ -4,14 +4,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Flight {
-	static int flightCount;
-	int flightNumber;
-	String originCity;
-	String destinationCity;
-	int takeoffTime;
-	int arrivalTime;
-	String airline;
-	//time as an int for sorting purposes
+	private static int flightCount;
+	private int flightNumber;
+	private String originCity;
+	private String destinationCity;
+	private int takeoffTime;
+	private int arrivalTime;
+	private String airline;
+	
 	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline) {
 		this.flightNumber=++flightCount;
 		this.originCity = originCity;
@@ -19,7 +19,6 @@ public class Flight {
 		this.takeoffTime = takeoffTime;
 		this.arrivalTime = arrivalTime;
 		this.airline = airline;
-		this.insertDB();//insert the customer into the database
 	}
 	public String getOriginCity() {
 		return originCity;
@@ -54,6 +53,8 @@ public class Flight {
 		}
 		else
 			ampm="am";
+		if((time%100)==0)
+			return hour+":"+"00"+ampm;
 		return hour+":"+(time%100)+ampm;
 	}//method for returning a time int as a String
 	public String toString() {

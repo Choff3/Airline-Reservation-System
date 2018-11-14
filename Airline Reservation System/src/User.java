@@ -123,6 +123,8 @@ public abstract class User {
 		finally {
 			//TODO: Close the database connection
 		}
-		
+	}
+	public String toString() {
+		return this.firstname+" "+this.lastname;
 	}
 }
