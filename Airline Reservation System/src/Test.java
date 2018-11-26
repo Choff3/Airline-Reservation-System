@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Test {
@@ -12,19 +13,19 @@ public class Test {
 		
 		
 		
-		//Customer cus = new Customer("John","Doe","a",4,"a","a","a","a","a","a","a");
+		//Customer cus = new Customer("John","Doe","a",3,"a","a","a","a","a","a","a");
 		//cus.insertDB();
 		
 		//Admin ad = new Admin("Steve","Smith","a",4,"a","a","a","a","a","a","a");
 		//ad.insertDB();
 		
-		/*ArrayList l = Database_Select.getFlights();
+		ArrayList l = Database_Select.getFlights();
 		ArrayList c = Database_Select.getCustomers();
 		ArrayList a = Database_Select.getAdmins();
 		
 		System.out.println(l);
 		System.out.println(c);
-		System.out.println(a);*/
+		System.out.println(a);
 		
 	}
 	
