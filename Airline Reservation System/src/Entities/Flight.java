@@ -1,3 +1,4 @@
+package Entities;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -65,7 +66,7 @@ public class Flight {
 				" at "+timeToString(arrivalTime)+".";
 	}//toString method
 	
-	protected void insertDB() {	//method for inserting flights into the database
+	public void insertDB() {	//method for inserting flights into the database
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");

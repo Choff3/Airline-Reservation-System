@@ -1,3 +1,4 @@
+package Entities;
 public class Admin extends User {
 
 	private int employeeID;
@@ -10,7 +11,7 @@ public class Admin extends User {
 	public int getId() {
 		return this.employeeID;
 	}
-	protected void insertDB() {
+	public void insertDB() {
 		this.employeeID = ++empCount;
 		super.insertDB("employees",this.employeeID);
 	}
