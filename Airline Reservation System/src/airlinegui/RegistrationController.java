@@ -59,7 +59,7 @@ public class RegistrationController {
 		else {
 			Customer c = new Customer(fname,lname,address,zip,state,uname,
 					pword,email,ssn,question,answer);
-			c.insertDB();
+			//c.insertDB();
 		}
 		close();
 		}

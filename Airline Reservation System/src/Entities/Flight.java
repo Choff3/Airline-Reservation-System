@@ -13,20 +13,30 @@ public class Flight {
 	private int takeoffTime;
 	private int arrivalTime;
 	private String airline;
+	private String date;
 	
-	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline) {
+	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline, String date) {
 		this.flightNumber=++flightCount;
 		this.originCity = originCity;
 		this.destinationCity = destinationCity;
 		this.takeoffTime = takeoffTime;
 		this.arrivalTime = arrivalTime;
 		this.airline = airline;
+		this.date = date;
 	}
 	
 	public Flight() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public String getOriginCity() {
 		return originCity;
 	}
@@ -77,13 +87,10 @@ public class Flight {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"')");
+			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+",'"+this.date+"')");
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			//TODO close connection
 		}
 	}
 	
@@ -98,6 +105,7 @@ public class Flight {
 			statement.setInt(3, this.getTakeoffTime());
 			statement.setInt(4, this.getArrivalTime());
 			statement.setInt(5, this.flightNumber);
+			statement.setString(6, this.getDate());
 			statement.executeUpdate();
 			System.out.println("Flight info updated successfully.");
 			con.close();
@@ -119,8 +127,6 @@ public class Flight {
 			con.close();
 		} catch (SQLException e) {
 			System.out.print("Error");
-		}finally {
-			//TODO close connection
 		}
 	}
 	

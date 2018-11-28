@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.Admin;
-import Entities.Customer;
 import Entities.Database_Select;
 import Entities.Flight;
 
@@ -59,7 +58,7 @@ public class Test {
 		System.out.println("Security Answer: ");
 		String answer = input.nextLine();
 		int zip = Integer.parseInt(szip);
-		new Customer(fname,lname,address,zip,state,uname,password,email,ssn,question,answer).insertDB();
+		//new Customer(fname,lname,address,zip,state,uname,password,email,ssn,question,answer).insertDB();
 	}
 	
 	public static void addAdmin() {	
