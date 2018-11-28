@@ -165,7 +165,8 @@ public class Database_Select {
          int tTime  = rs.getInt("T_Time");
          int aTime  = rs.getInt("A_Time");
          String airline = rs.getString("Airline");
-         FlightList.add(new Flight(oCity, dCity, tTime, aTime, airline));
+         String date = rs.getString("F_Date");
+         FlightList.add(new Flight(oCity, dCity, tTime, aTime, airline,date));
       }
       rs.close();
    }catch(SQLException se){

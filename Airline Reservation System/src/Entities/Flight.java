@@ -12,14 +12,16 @@ public class Flight {
 	private int takeoffTime;
 	private int arrivalTime;
 	private String airline;
+	private String date;
 	
-	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline) {
+	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline, String date) {
 		this.flightNumber=++flightCount;
 		this.originCity = originCity;
 		this.destinationCity = destinationCity;
 		this.takeoffTime = takeoffTime;
 		this.arrivalTime = arrivalTime;
 		this.airline = airline;
+		this.date = date;
 	}
 	public String getOriginCity() {
 		return originCity;
@@ -44,6 +46,13 @@ public class Flight {
 	}
 	public void setArrivalTime(int arrivalTime) {
 		this.arrivalTime = arrivalTime;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public String timeToString(int time) {
 		int hour = (time/100);
@@ -71,7 +80,7 @@ public class Flight {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"')");
+			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+","+this.date+"')");
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
