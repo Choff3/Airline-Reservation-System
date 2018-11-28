@@ -5,7 +5,7 @@ public class Admin extends User {
 	private static int empCount;
 	
 	//this creates a flight object
-	Flight myFlight = new Flight();
+	Flight myFlight;
 	
 	public Admin(String firstname, String lastname, String address, int zip, String state, String username,
 			String password, String email, String ssn, String question, String answer) {
