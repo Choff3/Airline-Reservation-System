@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.Admin;
-import Entities.Database_Select;
 import Entities.Flight;
 
 public class Test {
@@ -23,9 +22,12 @@ public class Test {
 		//Admin ad = new Admin("Steve","Smith","a",4,"a","a","a","a","a","a","a");
 		//ad.insertDB();
 		
-		ArrayList l = Database_Select.getFlights();
-		ArrayList c = Database_Select.getCustomers();
-		ArrayList a = Database_Select.getAdmins();
+		ArrayList l = Entities.Database_Select.getFlights();
+		ArrayList c = Entities.Database_Select.getCustomers();
+		ArrayList a = Entities.Database_Select.getAdmins();
+		
+		Flight f = (Flight) l.get(0);
+		System.out.println(f.getDate());
 		
 		System.out.println(l);
 		System.out.println(c);
@@ -103,7 +105,7 @@ public class Test {
 		String aline = input.nextLine();
 		int ttime = Integer.parseInt(sttime);
 		int atime = Integer.parseInt(satime);
-		new Flight(ocity,dcity,ttime,atime,aline).insertDB();
+		//new Flight(ocity,dcity,ttime,atime,aline).insertDB();
 	}
 
 }

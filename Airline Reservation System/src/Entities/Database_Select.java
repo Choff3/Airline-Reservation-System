@@ -166,6 +166,7 @@ public class Database_Select {
          int aTime  = rs.getInt("A_Time");
          String airline = rs.getString("Airline");
          String date = rs.getString("F_Date");
+         
          FlightList.add(new Flight(oCity, dCity, tTime, aTime, airline, date));
       }
       rs.close();

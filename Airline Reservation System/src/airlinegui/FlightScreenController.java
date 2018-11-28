@@ -61,7 +61,10 @@ public class FlightScreenController {
     	flightslist.addAll(Database_Select.getFlights());
     	
     	return flightslist;
-    	
+    }
+    
+    public void book() {
+    	System.out.println("Flight Booked");
     }
 	
 }
