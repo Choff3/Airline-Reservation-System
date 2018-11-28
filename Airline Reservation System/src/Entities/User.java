@@ -1,6 +1,9 @@
 package Entities;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class User {
@@ -16,6 +19,8 @@ public abstract class User {
 	private String ssn;
 	private String question;
 	private String answer;
+	
+	Flight myFlight = new Flight();
 	
 	public User(String firstname, String lastname, String address, int zip, String state, String username,
 			String password, String email, String ssn, String question, String answer) {
@@ -124,6 +129,72 @@ public abstract class User {
 		}
 
 	}
+	
+	//adds flight to user account
+	protected void createBooking(String table, int id, int flightNumber) {
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			PreparedStatement statement = con.prepareStatement("insert into " + table + "(F_Number) values (?)");
+			statement.setInt(1, flightNumber);
+			statement.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//TODO close connection
+		}
+		
+	}
+	
+	
+	//adds flight to user account
+	protected void deleteBooking(String table, int id, int flightNumber) {
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			PreparedStatement statement = con.prepareStatement("delete from " + table + " where F_Number = ?");
+			statement.setInt(1, flightNumber);
+			statement.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//TODO close connection
+		}
+		
+	}
+	
+	//counts the number of rows ("seats") in a flight
+	protected int countDB(int flightNumber) {
+		int rowCount = 0;
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			PreparedStatement statement = con.prepareStatement ("Select * from flights WHERE F_Number = ?");
+			statement.setInt(1, flightNumber);
+			ResultSet rs = statement.executeQuery();
+		    while (rs.next()) {
+		        rowCount = rs.getInt(1);
+		      }
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//TODO close connection
+		}
+		
+		  return rowCount;
+	}
+	
+	protected void searchFlight(String originCity, String destinationCity,int takeOffTime, int arrivalTime) {
+		myFlight.searchDB(originCity, destinationCity, takeOffTime, arrivalTime);
+		
+	}
+	
 	public String toString() {
 		return this.firstname+" "+this.lastname;
 	}

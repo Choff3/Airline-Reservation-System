@@ -1,6 +1,7 @@
 package Entities;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -12,17 +13,20 @@ public class Flight {
 	private int takeoffTime;
 	private int arrivalTime;
 	private String airline;
-	private String date;
 	
-	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline, String date) {
+	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline) {
 		this.flightNumber=++flightCount;
 		this.originCity = originCity;
 		this.destinationCity = destinationCity;
 		this.takeoffTime = takeoffTime;
 		this.arrivalTime = arrivalTime;
 		this.airline = airline;
-		this.date = date;
 	}
+	
+	public Flight() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public String getOriginCity() {
 		return originCity;
 	}
@@ -46,13 +50,6 @@ public class Flight {
 	}
 	public void setArrivalTime(int arrivalTime) {
 		this.arrivalTime = arrivalTime;
-	}
-	
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
 	}
 	public String timeToString(int time) {
 		int hour = (time/100);
@@ -80,7 +77,7 @@ public class Flight {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+","+this.date+"')");
+			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"')");
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -89,4 +86,60 @@ public class Flight {
 			//TODO close connection
 		}
 	}
+	
+	protected void updateDB(int flightNumber, String originCity, String destinationCity, int takeoffTime, int arrivalTime) {	//method for updating flight information in the database
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			PreparedStatement statement = con.prepareStatement ("UPDATE flights SET O_City = ?, D_City = ?,"
+					+ "T_Time = ?, A_Time = ? WHERE F_Number = ?");
+			statement.setString(1, this.getOriginCity());
+			statement.setString(2, this.getDestinationCity());
+			statement.setInt(3, this.getTakeoffTime());
+			statement.setInt(4, this.getArrivalTime());
+			statement.setInt(5, this.flightNumber);
+			statement.executeUpdate();
+			System.out.println("Flight info updated successfully.");
+			con.close();
+		} catch (SQLException e) {
+			System.out.print("Error");
+		}finally {
+			//TODO close connection
+		}
+	}
+	
+	protected void deleteDB(int flightNumber) {	//method for deleting flights from the database
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			PreparedStatement statement = con.prepareStatement("delete from flights where F_Number = ?");
+			statement.setInt(1, this.flightNumber);
+			statement.executeUpdate();
+			System.out.println("Flight deleted successfully.");
+			con.close();
+		} catch (SQLException e) {
+			System.out.print("Error");
+		}finally {
+			//TODO close connection
+		}
+	}
+	
+	protected void searchDB(String originCity, String destinationCity,int takeOffTime, int arrivalTime) {	//method for searching flights in the database
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			PreparedStatement statement = con.prepareStatement("Select * from flights WHERE O_City = ?, D_City = ?,  T_Time = ?, A_Time = ?");
+			statement.setString(1, this.getOriginCity());
+			statement.setString(2, this.getDestinationCity());
+			statement.setInt(3, this.getTakeoffTime());
+			statement.setInt(4, this.getArrivalTime());
+			statement.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			System.out.print("Error");
+		}finally {
+			//TODO close connection
+		}
+	}
+	
 }
