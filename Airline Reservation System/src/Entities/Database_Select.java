@@ -154,7 +154,7 @@ public class Database_Select {
       //System.out.println("Creating statement...");
       stmt = conn.createStatement();
 
-      String sql = "SELECT F_Number, O_City, D_City, T_Time, A_Time, Airline FROM flights";
+      String sql = "SELECT F_Number, O_City, D_City, T_Time, A_Time, Airline, F_Date FROM flights";
       ResultSet rs = stmt.executeQuery(sql);
       //STEP 5: Extract data from result set
       while(rs.next()){

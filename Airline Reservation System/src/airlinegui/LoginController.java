@@ -1,5 +1,6 @@
 package airlinegui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Entities.Admin;
@@ -24,12 +25,12 @@ public class LoginController {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
 		Stage regwindow = new Stage();
-		regwindow.setScene(new Scene(root,1000,1000));
+		regwindow.setScene(new Scene(root,650,500));
 		regwindow.show();
 		
 	}
 	
-	public void login() {
+	public void login() throws IOException {
 		
 		String uname = tuname.getText();
 		String pword = tpword.getText();
@@ -60,8 +61,11 @@ public class LoginController {
 		
 	}
 	
-	public void customerLogin(Customer c) {
-		System.out.println("customer is logged in "+c);
+	public void customerLogin(Customer c) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("CustomerScreen.fxml"));
+		Stage regwindow = new Stage();
+		regwindow.setScene(new Scene(root,650,500));
+		regwindow.show();
 	}
 	
 	public void adminLogin(Admin a) {

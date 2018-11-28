@@ -15,6 +15,10 @@ public class Flight {
 	private String airline;
 	private String date;
 	
+	private String stTime;
+	private String saTime;
+	//string version of time for display purposes
+	
 	public Flight(String originCity, String destinationCity, int takeoffTime, int arrivalTime,String airline, String date) {
 		this.flightNumber=++flightCount;
 		this.originCity = originCity;
@@ -23,8 +27,34 @@ public class Flight {
 		this.arrivalTime = arrivalTime;
 		this.airline = airline;
 		this.date = date;
+		this.stTime = timeToString(takeoffTime);
+		this.saTime = timeToString(arrivalTime);
 	}
 	
+	public String getAirline() {
+		return airline;
+	}
+
+	public void setAirline(String airline) {
+		this.airline = airline;
+	}
+
+	public String getStTime() {
+		return stTime;
+	}
+
+	public void setStTime(String stTime) {
+		this.stTime = stTime;
+	}
+
+	public String getSaTime() {
+		return saTime;
+	}
+
+	public void setSaTime(String saTime) {
+		this.saTime = saTime;
+	}
+
 	public String getDate() {
 		return date;
 	}
