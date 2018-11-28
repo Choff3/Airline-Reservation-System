@@ -25,10 +25,6 @@ public class Flight {
 		this.date = date;
 	}
 	
-	public Flight() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	public String getDate() {
 		return date;
 	}
