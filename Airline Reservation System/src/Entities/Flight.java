@@ -174,4 +174,8 @@ public class Flight {
 			//TODO close connection
 		}
 	}
+
+	public int getFlightNumber() {
+		return this.flightNumber;
+	}
 }

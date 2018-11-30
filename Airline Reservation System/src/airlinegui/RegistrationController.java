@@ -1,6 +1,7 @@
 package airlinegui;
 import Entities.Admin;
 import Entities.Customer;
+import Entities.Database_Select;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -55,12 +56,13 @@ public class RegistrationController {
 			Admin a = new Admin(fname,lname,address,zip,state,uname,
 						pword,email,ssn,question,answer);
 			a.insertDB();
+			Database_Select.adminList.add(a);
 		}
 		else {
 			Customer c = new Customer(fname,lname,address,zip,state,uname,
 					pword,email,ssn,question,answer);
-			//c.insertDB();
 			c.insertDB();
+			Database_Select.customerList.add(c);
 		}
 		close();
 		}

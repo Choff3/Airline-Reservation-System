@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 public class CustomerController {
 
+	//@FXML
+	//static Label userLabel = new Label(LoginController.loggedIn.toString());
+	
 	public void viewFlights() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("FlightsScreen.fxml"));
 		Stage regwindow = new Stage();
@@ -16,8 +19,13 @@ public class CustomerController {
 		regwindow.show();
 	}
 	
-	public void viewBooked() {
-		System.out.println("Viewing Booked");
+	public void viewBooked() throws IOException {
+		
+		Parent root = FXMLLoader.load(getClass().getResource("BookedFlightsScreen.fxml"));
+		Stage regwindow = new Stage();
+		regwindow.setScene(new Scene(root,650,500));
+		regwindow.show();
+		
 	}
 	
 }

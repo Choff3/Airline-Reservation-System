@@ -6,10 +6,13 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airlinegui.CustomerController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airlinegui.BookedFlightsController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -52,9 +55,22 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="237.0" layoutY="113.0" mnemonicParsing="false" onAction="#viewFlights" text="Available Flights" />
-            <Button layoutX="231.0" layoutY="172.0" mnemonicParsing="false" onAction="#viewBooked" text="My Booked Flights" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="241.0" layoutY="39.0" prefHeight="17.0" prefWidth="111.0" text="Customer Page" textAlignment="CENTER" />
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <TableView fx:id="table" layoutX="14.0" layoutY="14.0" onMouseClicked="#selectFlight" prefHeight="306.0" prefWidth="612.0">
+              <columns>
+                <TableColumn fx:id="originColumn" prefWidth="104.0" text="Origin" />
+                <TableColumn fx:id="destinationColumn" prefWidth="110.0" text="Destination" />
+                  <TableColumn fx:id="dateColumn" prefWidth="72.0" text="Date" />
+                  <TableColumn fx:id="takeoffColumn" prefWidth="110.0" text="Takeoff Time" />
+                  <TableColumn fx:id="arrivalColumn" prefWidth="110.0" text="Arrival Time" />
+                  <TableColumn fx:id="airlineColumn" prefWidth="105.0" text="Airline" />
+              </columns>
+            </TableView>
+            <Button layoutX="296.0" layoutY="331.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
       </children>
     </AnchorPane>
   </children>

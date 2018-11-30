@@ -60,7 +60,7 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="306.0" prefWidth="612.0">
+            <TableView fx:id="table" layoutX="14.0" layoutY="14.0" onMouseClicked="#selectFlight" prefHeight="306.0" prefWidth="612.0">
               <columns>
                 <TableColumn fx:id="originColumn" prefWidth="104.0" text="Origin" />
                 <TableColumn fx:id="destinationColumn" prefWidth="110.0" text="Destination" />
@@ -70,7 +70,7 @@
                   <TableColumn fx:id="airlineColumn" prefWidth="105.0" text="Airline" />
               </columns>
             </TableView>
-            <Button layoutX="291.0" layoutY="331.0" mnemonicParsing="false" text="Book" />
+            <Button layoutX="296.0" layoutY="331.0" mnemonicParsing="false" onAction="#book" text="Book" />
       </children>
     </AnchorPane>
   </children>

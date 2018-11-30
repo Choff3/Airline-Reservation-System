@@ -21,6 +21,8 @@ public class LoginController {
 	@FXML
 	TextField tpword;
 	
+	static User loggedIn;
+	
 	public void register() throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
@@ -54,6 +56,7 @@ public class LoginController {
 				customerLogin((Customer) u);
 				valid = true;
 			}
+			
 		}
 		
 		if(!valid)
@@ -62,10 +65,11 @@ public class LoginController {
 	}
 	
 	public void customerLogin(Customer c) throws IOException {
+		loggedIn = (Customer) c;
 		Parent root = FXMLLoader.load(getClass().getResource("CustomerScreen.fxml"));
-		Stage regwindow = new Stage();
-		regwindow.setScene(new Scene(root,650,500));
-		regwindow.show();
+		Stage cusWindow = new Stage();
+		cusWindow.setScene(new Scene(root,650,500));
+		cusWindow.show();
 	}
 	
 	public void adminLogin(Admin a) {

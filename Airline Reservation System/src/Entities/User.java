@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public abstract class User {
 
@@ -20,8 +21,9 @@ public abstract class User {
 	private String ssn;
 	private String question;
 	private String answer;
+	private int ID;
 	
-	Flight myFlight;
+	private ArrayList<Flight> booked = new ArrayList<Flight>();
 	
 	public User(String firstname, String lastname, String address, int zip, String state, String username,
 			String password, String email, String ssn, String question, String answer) {
@@ -36,7 +38,69 @@ public abstract class User {
 		this.ssn = ssn;
 		this.question = question;
 		this.answer = answer;
+		this.ID = (int) (1+Math.random()*1000000);
 	}
+	
+	public User(String firstname, String lastname, String address, int zip, String state, String username,
+			String password, String email, String ssn, String question, String answer, int id) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
+		this.zip = zip;
+		this.state = state;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.ssn = ssn;
+		this.question = question;
+		this.answer = answer;
+		this.ID = id;
+	}
+	
+	public void book(Flight f) {
+	
+	if(this.booked.contains(f))
+		System.out.println("Already Booked");
+		
+	else {
+		Booking b = null;
+		if(this instanceof Customer)
+			b = new Booking((Customer)this, f);
+		else
+			b = new Booking((Admin)this, f);
+		booked.add(f);
+		b.insertDB();
+	}
+	}
+	
+	public void updateBookings() {
+		
+		ArrayList<Booking> bookingsList = Database_Select.getBookings();
+		
+		for(int i = 0; i<bookingsList.size(); i++) {
+			Booking b = bookingsList.get(i);
+			if(b.getUserID()==this.ID) {
+				this.booked.add(b.getFlightBooked());
+			}
+		}
+	}
+	
+	public void deleteBooking(Flight f) {
+		
+		int index = this.booked.indexOf(f);
+		this.booked.remove(index);
+		Booking.deleteDB(this.ID, f.getFlightNumber());
+		
+	}
+	
+	public int getID() {
+		return ID;
+	}
+
+	public ArrayList<Flight> getBooked() {
+		return booked;
+	}
+
 	public String getFirstname() {
 		return firstname;
 	}
@@ -115,14 +179,14 @@ public abstract class User {
 		else
 			return "incorrect answer";
 	}
-	protected void insertDB(String table,int id) { //method for inserting users into the database
+	protected void insertDB(String table) { //method for inserting users into the database
 		
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into "+table+" values("
-					+ id +",'"+this.firstname+"','"+this.lastname+"','"+this.address+"',"+this.zip+",'"+this.state+"','"+this.username+"','"+this.password+"','"+this.email+"','"+this.ssn+"','"+this.question+"','"+this.answer+"')");
+					+ this.ID +",'"+this.firstname+"','"+this.lastname+"','"+this.address+"',"+this.zip+",'"+this.state+"','"+this.username+"','"+this.password+"','"+this.email+"','"+this.ssn+"','"+this.question+"','"+this.answer+"')");
 			connection.close();
 		} 
 		catch (Exception e) {
@@ -192,11 +256,11 @@ public abstract class User {
 	}
 	
 	protected void searchFlight(String originCity, String destinationCity,int takeOffTime, int arrivalTime) {
-		myFlight.searchDB(originCity, destinationCity, takeOffTime, arrivalTime);
+		//myFlight.searchDB(originCity, destinationCity, takeOffTime, arrivalTime);
 		
 	}
 	
 	public String toString() {
-		return this.firstname+" "+this.lastname;
+		return "ID: "+this.ID+" "+this.firstname+" "+this.lastname;
 	}
 }

@@ -1,8 +1,6 @@
 package airlinegui;
 
-import Entities.Database_Select;
 import Entities.Flight;
-import Entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,9 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class FlightScreenController {
-
-	static User loggedIn;
+public class BookedFlightsController {
 	
 	@FXML
 	private TableView<Flight> table;
@@ -63,7 +59,7 @@ public class FlightScreenController {
     
     public ObservableList<Flight> getFlightsTable(){
     	ObservableList<Flight> flightslist = FXCollections.observableArrayList();
-    	flightslist.addAll(Database_Select.getFlights());
+    	flightslist.addAll(LoginController.loggedIn.getBooked());
     	
     	return flightslist;
     }
@@ -76,10 +72,9 @@ public class FlightScreenController {
     	
     }
     @FXML
-    public void book() {
+    public void delete() {
     	try {	
-    		LoginController.loggedIn.book(selected);
-    		AlertBox.display("Success", "The flight has been booked. \n"+selected);
+    		LoginController.loggedIn.deleteBooking(selected);
     	}
     	catch(Exception e) {
     		AlertBox.display("Error", "Please select a flight.");

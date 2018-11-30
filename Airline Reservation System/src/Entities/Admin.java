@@ -1,8 +1,5 @@
 package Entities;
 public class Admin extends User {
-
-	private int employeeID;
-	private static int empCount;
 	
 	//this creates a flight object
 	Flight myFlight;
@@ -11,12 +8,14 @@ public class Admin extends User {
 			String password, String email, String ssn, String question, String answer) {
 		super(firstname, lastname, address, zip, state, username, password, email, ssn, question, answer);
 	}
-	public int getId() {
-		return this.employeeID;
+	
+	public Admin(String firstname, String lastname, String address, int zip, String state, String username,
+			String password, String email, String ssn, String question, String answer, int id) {
+		super(firstname, lastname, address, zip, state, username, password, email, ssn, question, answer, id);
 	}
+	
 	public void insertDB() {
-		this.employeeID = ++empCount;
-		super.insertDB("employees",this.employeeID);
+		super.insertDB("employees");
 	}
 	
 	//gives admin the ability to add/insert new flights
@@ -35,6 +34,5 @@ public class Admin extends User {
 		myFlight.deleteDB(flightNumber);
 		
 	}
-	
 	
 }

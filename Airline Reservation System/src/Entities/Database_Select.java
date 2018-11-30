@@ -10,15 +10,16 @@ public class Database_Select {
    // JDBC driver name and database URL
    static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";  
    static final String DB_URL = "jdbc:oracle:thin:@131.96.101.119:1521:cisjj";
-   static ArrayList<Flight> FlightList = new ArrayList();
-   static ArrayList<Customer> customerList = new ArrayList();
-   static ArrayList<Admin> adminList = new ArrayList();
+   public static ArrayList<Flight> FlightList = new ArrayList();
+   public static ArrayList<Customer> customerList = new ArrayList();
+   public static ArrayList<Admin> adminList = new ArrayList();
+   public static ArrayList<Booking> bookingList = new ArrayList();
 
    //  Database credentials
    static final String USER = "c##CHoff82354";
    static final String PASS = "fpcs5673";
    
-   public static ArrayList<Customer> getCustomers() {//method that returns an ArrayList of Customer objects from the database
+   public static void setCustomers() {//method that returns an ArrayList of Customer objects from the database
 	   Connection conn = null;
 	   Statement stmt = null;
 	   try{
@@ -33,7 +34,7 @@ public class Database_Select {
 	      //STEP 4: Execute a query
 	      //System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
-	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer FROM customers";
+	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer, ID FROM customers";
 	      ResultSet rs = stmt.executeQuery(sql);
 	      //STEP 5: Extract data from result set
 	      while(rs.next()){
@@ -49,9 +50,9 @@ public class Database_Select {
 	         String ssn = rs.getString("SSN");
 	         String question = rs.getString("Question");
 	         String answer = rs.getString("answer");
+	         int id = rs.getInt("ID");
 	         
-	         customerList.add(new Customer(firstName, lastName, address, zip, state, userName, password, email, ssn, question, answer));
-	      
+	         customerList.add(new Customer(firstName, lastName, address, zip, state, userName, password, email, ssn, question, answer, id));
 	      }
 	      rs.close();
 	   }catch(SQLException se){
@@ -74,11 +75,9 @@ public class Database_Select {
 	         se.printStackTrace();
 	      }//end finally try
 	   }//end try
-	   
-		return customerList;
        }
    
-   public static ArrayList<Admin> getAdmins() {//method that returns an ArrayList of Admin objects from the database
+   public static void setAdmins() {//method that returns an ArrayList of Admin objects from the database
 	   Connection conn = null;
 	   Statement stmt = null;
 	   try{
@@ -93,7 +92,7 @@ public class Database_Select {
 	      //STEP 4: Execute a query
 	      //System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
-	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer FROM employees";
+	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer, ID FROM employees";
 	      ResultSet rs = stmt.executeQuery(sql);
 	      //STEP 5: Extract data from result set
 	      while(rs.next()){
@@ -109,9 +108,9 @@ public class Database_Select {
 	         String ssn = rs.getString("SSN");
 	         String question = rs.getString("Question");
 	         String answer = rs.getString("answer");
+	         int id = rs.getInt("ID");
 	         
-	         adminList.add(new Admin(firstName, lastName, address, zip, state, userName, password, email, ssn, question, answer));
-	      
+	         adminList.add(new Admin(firstName, lastName, address, zip, state, userName, password, email, ssn, question, answer, id));
 	      }
 	      rs.close();
 	   }catch(SQLException se){
@@ -134,11 +133,9 @@ public class Database_Select {
 	         se.printStackTrace();
 	      }//end finally try
 	   }//end try
-	   
-		return adminList;
        }
    
-   public static ArrayList<Flight> getFlights() {//method that returns an ArrayList of Flight objects from the database
+   public static void setFlights() {//method that returns an ArrayList of Flight objects from the database
    Connection conn = null;
    Statement stmt = null;
    try{
@@ -190,6 +187,70 @@ public class Database_Select {
          se.printStackTrace();
       }//end finally try
    }//end try
-   return FlightList;
 }
+   
+   public static void setBookings() {//method that returns an ArrayList of Flight objects from the database
+	   Connection conn = null;
+	   Statement stmt = null;
+	   try{
+	      //STEP 2: Register JDBC driver
+	      Class.forName("oracle.jdbc.driver.OracleDriver");
+
+	      //STEP 3: Open a connection
+	      //System.out.println("Connecting to a selected database...");
+	      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	      //System.out.println("Connected database successfully...");
+	      
+	      //STEP 4: Execute a query
+	      //System.out.println("Creating statement...");
+	      stmt = conn.createStatement();
+
+	      String sql = "SELECT User_ID, F_Num FROM Bookings";
+	      ResultSet rs = stmt.executeQuery(sql);
+	      //STEP 5: Extract data from result set
+	      while(rs.next()){
+	         //Retrieve by column name
+	         int uId  = rs.getInt("User_ID");
+	         int fNum  = rs.getInt("F_Num");
+	         
+	         bookingList.add(new Booking(uId,fNum));
+	      }
+	      rs.close();
+	   }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+	      //finally block used to close resources
+	      try{
+	         if(stmt!=null)
+	            conn.close();
+	      }catch(SQLException se){
+	      }// do nothing
+	      try{
+	         if(conn!=null)
+	            conn.close();
+	      }catch(SQLException se){
+	         se.printStackTrace();
+	      }//end finally try
+	   }//end try
+	}
+   
+   public static ArrayList<Flight> getFlights() {
+	return FlightList;
+}
+
+public static ArrayList<Customer> getCustomers() {
+	return customerList;
+}
+
+public static ArrayList<Admin> getAdmins() {
+	return adminList;
+}
+
+public static ArrayList<Booking> getBookings() {
+	   return bookingList;
+   }
 }
