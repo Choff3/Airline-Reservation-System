@@ -20,12 +20,12 @@
             <TextField fx:id="temail" layoutX="51.0" layoutY="115.0" text="Email Address" />
             <TextField fx:id="tssn" layoutX="237.0" layoutY="115.0" text="Social Security Number" />
             <TextField fx:id="tuname" layoutX="51.0" layoutY="168.0" text="Username" />
+            <PasswordField fx:id="tpword" layoutX="237.0" layoutY="168.0" />
             <TextField fx:id="tquestion" layoutX="52.0" layoutY="214.0" text="Security Question" />
             <TextField fx:id="tanswer" layoutX="237.0" layoutY="214.0" text="Security Answer" />
             <CheckBox fx:id="admin" layoutX="100.0" layoutY="261.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="70.0" text="Admin" />
             <Button layoutX="203.0" layoutY="317.0" mnemonicParsing="false" onAction="#register" text="Register" />
             <Button layoutX="370.0" layoutY="317.0" mnemonicParsing="false" onAction="#logout" text="Cancel" />
-            <PasswordField fx:id="tpword" layoutX="237.0" layoutY="168.0" />
             <Label layoutX="290.0" layoutY="151.0" text="Password" />
          </children>
     </AnchorPane>
