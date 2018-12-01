@@ -10,10 +10,10 @@ public class Database_Select {
    // JDBC driver name and database URL
    static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";  
    static final String DB_URL = "jdbc:oracle:thin:@131.96.101.119:1521:cisjj";
-   public static ArrayList<Flight> FlightList = new ArrayList();
-   public static ArrayList<Customer> customerList = new ArrayList();
-   public static ArrayList<Admin> adminList = new ArrayList();
-   public static ArrayList<Booking> bookingList = new ArrayList();
+   public static ArrayList<Flight> FlightList = new ArrayList<Flight>();
+   public static ArrayList<Customer> customerList = new ArrayList<Customer>();
+   public static ArrayList<Admin> adminList = new ArrayList<Admin>();
+   public static ArrayList<Booking> bookingList = new ArrayList<Booking>();
 
    //  Database credentials
    static final String USER = "c##CHoff82354";

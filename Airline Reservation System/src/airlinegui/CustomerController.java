@@ -25,7 +25,7 @@ public class CustomerController implements Initializable{
 	
 	public void viewBooked() throws IOException {
 		Stage stage = (Stage) userLabel.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("BookedflightsScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("BookedFlightsScreen.fxml"));
 	    stage.setScene(new Scene(root));
 	}
 	

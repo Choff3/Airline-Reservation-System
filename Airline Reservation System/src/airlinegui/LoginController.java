@@ -41,7 +41,7 @@ public class LoginController{
 		String uname = tuname.getText();
 		String pword = tpword.getText();
 		
-		ArrayList<User> users = new ArrayList();
+		ArrayList<User> users = new ArrayList<User>();
 		users.addAll(Database_Select.getCustomers());
 		users.addAll(Database_Select.getAdmins());
 		boolean valid = false;
