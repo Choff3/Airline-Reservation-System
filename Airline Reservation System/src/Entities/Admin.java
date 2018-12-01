@@ -29,10 +29,4 @@ public class Admin extends User {
 		
 	}
 	
-	//admin takes a flight number and uses method to select a flight to delete
-	protected void deleteFlight(int flightNumber) {
-		myFlight.deleteDB(flightNumber);
-		
-	}
-	
 }

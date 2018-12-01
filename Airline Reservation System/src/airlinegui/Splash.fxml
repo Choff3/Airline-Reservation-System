@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airlinegui.SplashController">
+  <children>
+    <AnchorPane fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="507.0" fitWidth="721.0" layoutX="-9.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@blue-clouds-day-fluffy-53594.jpeg" />
+               </image>
+            </ImageView>
+            <Label fx:id="title" layoutX="48.0" layoutY="164.0" text="Flight Reservation Application">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="337.0" text="Made by Charles Hoff, Araybia Jenkins, David West">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="233.0" layoutY="214.0" text="CIS 3270">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

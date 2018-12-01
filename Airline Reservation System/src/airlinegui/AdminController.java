@@ -12,32 +12,38 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class CustomerController implements Initializable{
+public class AdminController implements Initializable{
 	
 	@FXML
 	Label userLabel;
 	
-	public void viewFlights() throws IOException {
+	public void CustomerPage() throws IOException {
 		Stage stage = (Stage) userLabel.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("FlightsScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("CustomerScreen.fxml"));
 	    stage.setScene(new Scene(root));
 	}
 	
-	public void viewBooked() throws IOException {
+	public void addFlightScreen() throws IOException {
 		Stage stage = (Stage) userLabel.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("BookedflightsScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("AddFlightScreen.fxml"));
 	    stage.setScene(new Scene(root));
 	}
 	
-	public void logout() throws IOException {
+	public void deleteFlightScreen() throws IOException{
 		Stage stage = (Stage) userLabel.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("DeleteFlightScreen.fxml"));
 	    stage.setScene(new Scene(root));
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		userLabel.setText("Logged in: "+LoginController.loggedIn.toString());
+	}
+	
+	public void logout() throws IOException {
+		Stage stage = (Stage) userLabel.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+	    stage.setScene(new Scene(root));
 	}
 	
 }

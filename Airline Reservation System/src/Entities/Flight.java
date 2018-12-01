@@ -113,7 +113,7 @@ public class Flight {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+",'"+this.date+"')");
+			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"','"+this.date+"')");
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,7 +142,7 @@ public class Flight {
 		}
 	}
 	
-	protected void deleteDB(int flightNumber) {	//method for deleting flights from the database
+	public void deleteDB() {	//method for deleting flights from the database
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");

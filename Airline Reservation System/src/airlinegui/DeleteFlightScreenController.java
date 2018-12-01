@@ -1,11 +1,8 @@
 package airlinegui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import Entities.Database_Select;
 import Entities.Flight;
-import Entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,10 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class FlightScreenController {
+public class DeleteFlightScreenController {
 
-	static User loggedIn;
-	
 	@FXML
 	private TableView<Flight> table;
 	
@@ -70,29 +65,26 @@ public class FlightScreenController {
     
     public ObservableList<Flight> getFlightsTable(){
     	ObservableList<Flight> flightslist = FXCollections.observableArrayList();
-    	flightslist.addAll(Database_Select.getFlights());
-    	
+    	flightslist.addAll(Entities.Database_Select.FlightList);
     	return flightslist;
     }
     
     public void selectFlight() {
-    	
     	ObservableList<Flight> cellSelected;
     	cellSelected = table.getSelectionModel().getSelectedItems();
     	this.selected = cellSelected.get(0);
-    	
     }
     @FXML
-    public void book() {
+    public void delete() {
     	try {
-    		ArrayList<Flight> userFlights = new ArrayList<Flight>();
-    		userFlights.addAll(LoginController.loggedIn.getBooked());
-    		if(userFlights.contains(selected))
-    			AlertBox.display("Error", "You have already booked that flight.");
-    		else {
-    			LoginController.loggedIn.book(selected);
-    			AlertBox.display("Success", "The flight has been booked. \n"+selected);
-    		}
+    		selected.deleteDB();
+    		Entities.Database_Select.FlightList.remove(selected);
+    		
+    		ObservableList<Flight> cellSelected, all;
+    		all = table.getItems();
+        	cellSelected = table.getSelectionModel().getSelectedItems();
+        	cellSelected.forEach(all::remove);
+    		
     	}
     	catch(Exception e) {
     		AlertBox.display("Error", "Please select a flight.");
@@ -105,9 +97,15 @@ public class FlightScreenController {
 	    stage.setScene(new Scene(root));
 	}
     
-    public void mainMenu() throws IOException {
+    public void customerMenu() throws IOException {
 		Stage stage = (Stage) table.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("CustomerScreen.fxml"));
+	    stage.setScene(new Scene(root));
+	}
+    
+    public void adminMenu() throws IOException {
+		Stage stage = (Stage) table.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("AdminScreen.fxml"));
 	    stage.setScene(new Scene(root));
 	}
 	

@@ -261,6 +261,6 @@ public abstract class User {
 	}
 	
 	public String toString() {
-		return "ID: "+this.ID+" "+this.firstname+" "+this.lastname;
+		return this.firstname+" "+this.lastname;
 	}
 }

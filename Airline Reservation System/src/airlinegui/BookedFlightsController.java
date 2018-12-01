@@ -1,12 +1,18 @@
 package airlinegui;
 
+import java.io.IOException;
+
 import Entities.Flight;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class BookedFlightsController {
 	
@@ -75,10 +81,26 @@ public class BookedFlightsController {
     public void delete() {
     	try {	
     		LoginController.loggedIn.deleteBooking(selected);
+    		ObservableList<Flight> cellSelected, all;
+    		all = table.getItems();
+        	cellSelected = table.getSelectionModel().getSelectedItems();
+        	cellSelected.forEach(all::remove);
     	}
     	catch(Exception e) {
     		AlertBox.display("Error", "Please select a flight.");
     	}
     }
+    
+    public void logout() throws IOException {
+		Stage stage = (Stage) table.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+	    stage.setScene(new Scene(root));
+	}
+    
+    public void mainMenu() throws IOException {
+		Stage stage = (Stage) table.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("CustomerScreen.fxml"));
+	    stage.setScene(new Scene(root));
+	}
 	
 }
