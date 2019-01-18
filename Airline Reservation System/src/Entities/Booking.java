@@ -90,8 +90,8 @@ public class Booking {
 	public static void deleteDB(int userID, int flightID) {
 		
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			PreparedStatement statement = con.prepareStatement("delete from Bookings where F_Num = ? AND User_ID = ?");
 			statement.setInt(1, flightID);
 			statement.setInt(2, userID);
@@ -109,8 +109,8 @@ public class Booking {
 	protected void insertDB() { //method for inserting bookings into the database
 		
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into Bookings values("
 					+ this.UserID +","+this.FlightID+")");

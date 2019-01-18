@@ -8,23 +8,23 @@ import java.util.ArrayList;
 
 public class Database_Select {
    // JDBC driver name and database URL
-   static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";  
-   static final String DB_URL = "jdbc:oracle:thin:@131.96.101.119:1521:cisjj";
+   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+   static final String DB_URL = "jdbc:mysql://localhost:3306/Flight Database";
    public static ArrayList<Flight> FlightList = new ArrayList<Flight>();
    public static ArrayList<Customer> customerList = new ArrayList<Customer>();
    public static ArrayList<Admin> adminList = new ArrayList<Admin>();
    public static ArrayList<Booking> bookingList = new ArrayList<Booking>();
 
    //  Database credentials
-   static final String USER = "c##CHoff82354";
-   static final String PASS = "fpcs5673";
+   static final String USER = "root";
+   static final String PASS = "GSUcis2020!!";
    
    public static void setCustomers() {//method that returns an ArrayList of Customer objects from the database
 	   Connection conn = null;
 	   Statement stmt = null;
 	   try{
 	      //STEP 2: Register JDBC driver
-	      Class.forName("oracle.jdbc.driver.OracleDriver");
+	      Class.forName("com.mysql.jdbc.Driver");
 
 	      //STEP 3: Open a connection
 	      //System.out.println("Connecting to a selected database...");
@@ -82,7 +82,7 @@ public class Database_Select {
 	   Statement stmt = null;
 	   try{
 	      //STEP 2: Register JDBC driver
-	      Class.forName("oracle.jdbc.driver.OracleDriver");
+	      Class.forName("com.mysql.jdbc.Driver");
 
 	      //STEP 3: Open a connection
 	      //System.out.println("Connecting to a selected database...");
@@ -140,7 +140,7 @@ public class Database_Select {
    Statement stmt = null;
    try{
       //STEP 2: Register JDBC driver
-      Class.forName("oracle.jdbc.driver.OracleDriver");
+      Class.forName("com.mysql.jdbc.Driver");
 
       //STEP 3: Open a connection
       //System.out.println("Connecting to a selected database...");
@@ -194,7 +194,7 @@ public class Database_Select {
 	   Statement stmt = null;
 	   try{
 	      //STEP 2: Register JDBC driver
-	      Class.forName("oracle.jdbc.driver.OracleDriver");
+	      Class.forName("com.mysql.jdbc.Driver");
 
 	      //STEP 3: Open a connection
 	      //System.out.println("Connecting to a selected database...");

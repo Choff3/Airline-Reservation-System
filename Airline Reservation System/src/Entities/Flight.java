@@ -110,8 +110,8 @@ public class Flight {
 	
 	public void insertDB() {	//method for inserting flights into the database
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"','"+this.date+"')");
 			connection.close();
@@ -122,8 +122,8 @@ public class Flight {
 	
 	protected void updateDB(int flightNumber, String originCity, String destinationCity, int takeoffTime, int arrivalTime) {	//method for updating flight information in the database
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			PreparedStatement statement = con.prepareStatement ("UPDATE flights SET O_City = ?, D_City = ?,"
 					+ "T_Time = ?, A_Time = ? WHERE F_Number = ?");
 			statement.setString(1, this.getOriginCity());
@@ -144,8 +144,8 @@ public class Flight {
 	
 	public void deleteDB() {	//method for deleting flights from the database
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			PreparedStatement statement = con.prepareStatement("delete from flights where F_Number = ?");
 			statement.setInt(1, this.flightNumber);
 			statement.executeUpdate();
@@ -159,8 +159,8 @@ public class Flight {
 	
 	protected void searchDB(String originCity, String destinationCity,int takeOffTime, int arrivalTime) {	//method for searching flights in the database
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			PreparedStatement statement = con.prepareStatement("Select * from flights WHERE O_City = ?, D_City = ?,  T_Time = ?, A_Time = ?");
 			statement.setString(1, this.getOriginCity());
 			statement.setString(2, this.getDestinationCity());

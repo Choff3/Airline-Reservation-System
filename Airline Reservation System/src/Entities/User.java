@@ -182,8 +182,8 @@ public abstract class User {
 	protected void insertDB(String table) { //method for inserting users into the database
 		
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("insert into "+table+" values("
 					+ this.ID +",'"+this.firstname+"','"+this.lastname+"','"+this.address+"',"+this.zip+",'"+this.state+"','"+this.username+"','"+this.password+"','"+this.email+"','"+this.ssn+"','"+this.question+"','"+this.answer+"')");
@@ -198,8 +198,8 @@ public abstract class User {
 	//adds flight to user account
 	protected void createBooking(String table, int id, int flightNumber) {
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			PreparedStatement statement = con.prepareStatement("insert into " + table + "(F_Number) values (?)");
 			statement.setInt(1, flightNumber);
 			statement.executeUpdate();
@@ -217,8 +217,8 @@ public abstract class User {
 	//adds flight to user account
 	protected void deleteBooking(String table, int id, int flightNumber) {
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			PreparedStatement statement = con.prepareStatement("delete from " + table + " where F_Number = ?");
 			statement.setInt(1, flightNumber);
 			statement.executeUpdate();
@@ -236,8 +236,8 @@ public abstract class User {
 	protected int countDB(int flightNumber) {
 		int rowCount = 0;
 		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@131.96.101.119:1521:cisjj", "c##CHoff82354", "fpcs5673");
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
 			PreparedStatement statement = con.prepareStatement ("Select * from flights WHERE F_Number = ?");
 			statement.setInt(1, flightNumber);
 			ResultSet rs = statement.executeQuery();
