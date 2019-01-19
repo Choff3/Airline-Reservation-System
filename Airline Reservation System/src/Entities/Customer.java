@@ -11,6 +11,6 @@ public class Customer extends User {
 		super(firstname, lastname, address, zip, state, username, password, email, ssn, question, answer, id);
 	}
 	public void insertDB() {
-		super.insertDB("customers");
+		super.insertDB("CUSTOMERS");
 	}
 }

@@ -110,10 +110,10 @@ public class Flight {
 	
 	public void insertDB() {	//method for inserting flights into the database
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			Connection connection = DriverManager.getConnection("jdbc:mysql://cisproject.cjh80q7hgyjz.us-east-2.rds.amazonaws.com:3306/Flight Database", "cis2019", "GSUcis2019!!");
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into flights values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"','"+this.date+"')");
+			statement.executeUpdate("insert into FLIGHTS values("+this.flightNumber+",'"+this.originCity+"','"+this.destinationCity+"',"+this.takeoffTime+","+this.arrivalTime+",'"+this.airline+"','"+this.date+"')");
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,9 +122,9 @@ public class Flight {
 	
 	protected void updateDB(int flightNumber, String originCity, String destinationCity, int takeoffTime, int arrivalTime) {	//method for updating flight information in the database
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
-			PreparedStatement statement = con.prepareStatement ("UPDATE flights SET O_City = ?, D_City = ?,"
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://cisproject.cjh80q7hgyjz.us-east-2.rds.amazonaws.com:3306/Flight Database", "cis2019", "GSUcis2019!!");
+			PreparedStatement statement = con.prepareStatement ("UPDATE FLIGHTS SET O_City = ?, D_City = ?,"
 					+ "T_Time = ?, A_Time = ? WHERE F_Number = ?");
 			statement.setString(1, this.getOriginCity());
 			statement.setString(2, this.getDestinationCity());
@@ -144,9 +144,9 @@ public class Flight {
 	
 	public void deleteDB() {	//method for deleting flights from the database
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
-			PreparedStatement statement = con.prepareStatement("delete from flights where F_Number = ?");
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://cisproject.cjh80q7hgyjz.us-east-2.rds.amazonaws.com:3306/Flight Database", "cis2019", "GSUcis2019!!");
+			PreparedStatement statement = con.prepareStatement("delete from FLIGHTS where F_Number = ?");
 			statement.setInt(1, this.flightNumber);
 			statement.executeUpdate();
 			System.out.println("Flight deleted successfully.");
@@ -159,9 +159,9 @@ public class Flight {
 	
 	protected void searchDB(String originCity, String destinationCity,int takeOffTime, int arrivalTime) {	//method for searching flights in the database
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
-			PreparedStatement statement = con.prepareStatement("Select * from flights WHERE O_City = ?, D_City = ?,  T_Time = ?, A_Time = ?");
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://cisproject.cjh80q7hgyjz.us-east-2.rds.amazonaws.com:3306/Flight Database", "cis2019", "GSUcis2019!!");
+			PreparedStatement statement = con.prepareStatement("Select * from FLIGHTS WHERE O_City = ?, D_City = ?,  T_Time = ?, A_Time = ?");
 			statement.setString(1, this.getOriginCity());
 			statement.setString(2, this.getDestinationCity());
 			statement.setInt(3, this.getTakeoffTime());

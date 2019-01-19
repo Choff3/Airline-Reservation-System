@@ -8,23 +8,23 @@ import java.util.ArrayList;
 
 public class Database_Select {
    // JDBC driver name and database URL
-   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://localhost:3306/Flight Database";
+   static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
+   static final String DB_URL = "jdbc:mysql://cisproject.cjh80q7hgyjz.us-east-2.rds.amazonaws.com:3306/Flight Database";
    public static ArrayList<Flight> FlightList = new ArrayList<Flight>();
    public static ArrayList<Customer> customerList = new ArrayList<Customer>();
    public static ArrayList<Admin> adminList = new ArrayList<Admin>();
    public static ArrayList<Booking> bookingList = new ArrayList<Booking>();
 
    //  Database credentials
-   static final String USER = "root";
-   static final String PASS = "GSUcis2020!!";
+   static final String USER = "cis2019";
+   static final String PASS = "GSUcis2019!!";
    
    public static void setCustomers() {//method that returns an ArrayList of Customer objects from the database
 	   Connection conn = null;
 	   Statement stmt = null;
 	   try{
 	      //STEP 2: Register JDBC driver
-	      Class.forName("com.mysql.jdbc.Driver");
+	      Class.forName("com.mysql.cj.jdbc.Driver");
 
 	      //STEP 3: Open a connection
 	      //System.out.println("Connecting to a selected database...");
@@ -34,7 +34,7 @@ public class Database_Select {
 	      //STEP 4: Execute a query
 	      //System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
-	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer, ID FROM customers";
+	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer, ID FROM CUSTOMERS";
 	      ResultSet rs = stmt.executeQuery(sql);
 	      //STEP 5: Extract data from result set
 	      while(rs.next()){
@@ -82,7 +82,7 @@ public class Database_Select {
 	   Statement stmt = null;
 	   try{
 	      //STEP 2: Register JDBC driver
-	      Class.forName("com.mysql.jdbc.Driver");
+	      Class.forName("com.mysql.cj.jdbc.Driver");
 
 	      //STEP 3: Open a connection
 	      //System.out.println("Connecting to a selected database...");
@@ -92,7 +92,7 @@ public class Database_Select {
 	      //STEP 4: Execute a query
 	      //System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
-	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer, ID FROM employees";
+	      String sql = "SELECT F_Name, L_Name, Address, Zip, State, U_Name, Password, email, SSN, Question, Answer, ID FROM EMPLOYEES";
 	      ResultSet rs = stmt.executeQuery(sql);
 	      //STEP 5: Extract data from result set
 	      while(rs.next()){
@@ -140,7 +140,7 @@ public class Database_Select {
    Statement stmt = null;
    try{
       //STEP 2: Register JDBC driver
-      Class.forName("com.mysql.jdbc.Driver");
+      Class.forName("com.mysql.cj.jdbc.Driver");
 
       //STEP 3: Open a connection
       //System.out.println("Connecting to a selected database...");
@@ -151,7 +151,7 @@ public class Database_Select {
       //System.out.println("Creating statement...");
       stmt = conn.createStatement();
 
-      String sql = "SELECT F_Number, O_City, D_City, T_Time, A_Time, Airline, F_Date FROM flights";
+      String sql = "SELECT F_Number, O_City, D_City, T_Time, A_Time, Airline, F_Date FROM FLIGHTS";
       ResultSet rs = stmt.executeQuery(sql);
       //STEP 5: Extract data from result set
       while(rs.next()){
@@ -194,7 +194,7 @@ public class Database_Select {
 	   Statement stmt = null;
 	   try{
 	      //STEP 2: Register JDBC driver
-	      Class.forName("com.mysql.jdbc.Driver");
+	      Class.forName("com.mysql.cj.jdbc.Driver");
 
 	      //STEP 3: Open a connection
 	      //System.out.println("Connecting to a selected database...");
@@ -205,7 +205,7 @@ public class Database_Select {
 	      //System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
 
-	      String sql = "SELECT User_ID, F_Num FROM Bookings";
+	      String sql = "SELECT User_ID, F_Num FROM BOOKINGS";
 	      ResultSet rs = stmt.executeQuery(sql);
 	      //STEP 5: Extract data from result set
 	      while(rs.next()){
