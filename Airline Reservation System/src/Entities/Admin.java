@@ -15,7 +15,7 @@ public class Admin extends User {
 	}
 	
 	public void insertDB() {
-		super.insertDB("employees");
+		super.insertDB("EMPLOYEES");
 	}
 	
 	//gives admin the ability to add/insert new flights

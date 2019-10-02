@@ -90,9 +90,9 @@ public class Booking {
 	public static void deleteDB(int userID, int flightID) {
 		
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
-			PreparedStatement statement = con.prepareStatement("delete from Bookings where F_Num = ? AND User_ID = ?");
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			Connection con = DriverManager.getConnection("jdbc:mysql://cisproject.cjh80q7hgyjz.us-east-2.rds.amazonaws.com:3306/Flight Database", "cis2019", "GSUcis2019!!");
+			PreparedStatement statement = con.prepareStatement("delete from BOOKINGS where F_Num = ? AND User_ID = ?");
 			statement.setInt(1, flightID);
 			statement.setInt(2, userID);
 			statement.executeUpdate();
@@ -109,10 +109,10 @@ public class Booking {
 	protected void insertDB() { //method for inserting bookings into the database
 		
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Flight Database", "root", "GSUcis2020!!");
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			Connection connection = DriverManager.getConnection("jdbc:mysql://cisproject.cjh80q7hgyjz.us-east-2.rds.amazonaws.com:3306/Flight Database", "cis2019", "GSUcis2019!!");
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into Bookings values("
+			statement.executeUpdate("insert into BOOKINGS values("
 					+ this.UserID +","+this.FlightID+")");
 			connection.close();
 		} 
